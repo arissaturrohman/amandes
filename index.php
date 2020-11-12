@@ -1,5 +1,6 @@
 <?php
 
+include("inc/config.php");
 error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 
 ?>
@@ -78,16 +79,45 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
                     </ul>
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
-                            <a href="?page=desa" class="nav-link">
-                                <i class="nav-icon fas fa-edit"></i>
-                                <p>Input Data</p>
+                            <a href="?page=perdes" class="nav-link">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>Data Perangkat Desa</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="?page=setting" class="nav-link">
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-cogs"></i>
-                                <p>Setting</p>
+                                <p>
+                                    Setting
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="?page=kec" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Input Kecamatan</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="?page=desa" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Desa</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="?page=jabatan" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Jabatan</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="?page=pendidikan" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Pendidikan</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </nav>
@@ -99,7 +129,7 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
 
-            <?php include('content.php'); ?>
+            <?php include('inc/content.php'); ?>
 
         </div>
         <!-- /.content-wrapper -->

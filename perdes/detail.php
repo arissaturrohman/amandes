@@ -1,0 +1,1 @@
+<a href="?page=perdes&action=edit" class="btn btn-primary">Detail</a>

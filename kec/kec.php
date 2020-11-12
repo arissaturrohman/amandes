@@ -3,12 +3,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Data Desa</h1>
+                <h1>Data Kecamatan</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                    <li class="breadcrumb-item active">Data Desa</li>
+                    <li class="breadcrumb-item active">Data Kecamatan</li>
                 </ol>
             </div>
         </div>
@@ -21,7 +21,7 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Table Desa</h3>
+            <h3 class="card-title">Table Kecamatan</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -35,7 +35,7 @@
                 <thead>
                     <tr>
                         <th class="align-middle" width="5%">No</th>
-                        <th>Nama Desa</th>
+                        <th>Nama Kecamatan</th>
                         <th class="align-middle" width="10%">Action</th>
                     </tr>
                 </thead>
@@ -44,8 +44,8 @@
                         <td class="align-middle">1</td>
                         <td>Gajah</td>
                         <td>
-                            <a href="?page=desa&action=edit" class="badge badge-success">edit</a>
-                            <a href="?page=desa&action=delete" class="badge badge-danger">delete</a>
+                            <a href="?page=kec&action=edit" class="badge badge-success">edit</a>
+                            <a href="?page=kec&action=delete" class="badge badge-danger">delete</a>
 
                         </td>
                     </tr>
@@ -54,7 +54,7 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-            <a href="?page=desa&action=add" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Add Data</a>
+            <a href="?page=kec&action=add" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Add Data</a>
         </div>
         <!-- /.card-footer-->
     </div>

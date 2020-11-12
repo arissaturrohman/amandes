@@ -22,6 +22,8 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
     <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -158,6 +160,30 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
     <script src="assets/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="assets/dist/js/demo.js"></script>
+
+    <script>
+    $(document).ready(function(){
+      $('#kec').change(function(){
+        var kecamatan = $(this).val();
+
+          $.ajax({
+            type: 'POST',
+            url: 'autoload.php',
+            data: 'id_kec='+kecamatan,
+            success: function(msg) {
+              $('#desa').html(msg);
+            }
+          });
+      })
+    });
+  </script>
+  <script>    
+    $(".custom-file-input").on("change", function() {
+      var fileName = $(this).val().split("\\").pop();
+      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+  </script>
+   
 </body>
 
 </html>

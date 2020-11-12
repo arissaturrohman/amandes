@@ -40,15 +40,21 @@
                     </tr>
                 </thead>
                 <tbody>
+                <?php 
+                $no = 1;
+                $sql = $conn->query("SELECT * FROM tb_kec");
+                while ($data = $sql->fetch_assoc()) {                  
+                ?>
                     <tr>
-                        <td class="align-middle">1</td>
-                        <td>Gajah</td>
+                        <td class="align-middle"><?= $no++; ?></td>
+                        <td><?= $data['kec']; ?></td>
                         <td>
-                            <a href="?page=kec&action=edit" class="badge badge-success">edit</a>
-                            <a href="?page=kec&action=delete" class="badge badge-danger">delete</a>
+                            <a href="?page=kec&action=edit&id=<?= $data['id_kec']; ?>" class="badge badge-success">edit</a>
+                            <a href="?page=kec&action=delete&id=<?= $data['id_kec']; ?>" onclick="return confirm('Apakah anda yakin menghapus data ini...?')" class="badge badge-danger">delete</a>
 
                         </td>
                     </tr>
+                <?php } ?>
                 </tbody>
             </table>
         </div>

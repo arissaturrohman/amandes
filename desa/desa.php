@@ -31,24 +31,38 @@
             </div>
         </div>
         <div class="card-body">
-            <table id="example2" class="table table-bordered table-hover">
+            <table id="example1" class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th class="align-middle" width="5%">No</th>
+                        <th>Nama Kecamatan</th>
                         <th>Nama Desa</th>
                         <th class="align-middle" width="10%">Action</th>
                     </tr>
                 </thead>
                 <tbody>
+                <?php 
+                $no = 1;
+                $sql = $conn->query("SELECT * FROM tb_desa ORDER BY id_kec ASC");
+                while ($data = $sql->fetch_assoc()) {
+                ?>
                     <tr>
-                        <td class="align-middle">1</td>
-                        <td>Gajah</td>
+                        <td class="align-middle"><?= $no++; ?></td>
                         <td>
-                            <a href="?page=desa&action=edit" class="badge badge-success">edit</a>
-                            <a href="?page=desa&action=delete" class="badge badge-danger">delete</a>
-
+                            <?php 
+                            $id_kec = $data['id_kec'];
+                            $sql_kec = $conn->query("SELECT * FROM tb_kec WHERE id_kec='$id_kec'");
+                            $data_kec = $sql_kec->fetch_assoc();
+                            echo $data_kec['kec'];
+                            ?>
+                        </td>
+                        <td><?= $data['desa']; ?></td>
+                        <td>
+                            <a href="?page=desa&action=edit&id=<?= $data['id_desa']; ?>" class="badge badge-success">edit</a>
+                            <a href="?page=desa&action=delete&id=<?= $data['id_desa']; ?>" onclick="return confirm('Apakah anda yakin menghapus data ini...?')" class="badge badge-danger">delete</a>
                         </td>
                     </tr>
+                <?php } ?>
                 </tbody>
             </table>
         </div>
@@ -59,6 +73,5 @@
         <!-- /.card-footer-->
     </div>
     <!-- /.card -->
-
 </section>
 <!-- /.content -->

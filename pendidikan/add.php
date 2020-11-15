@@ -50,6 +50,12 @@
 <!-- /.content -->
 
 <?php
+if (!isset($_POST['add'])) {
+    ?>
+        <script>
+            window.location.href='404.html';
+        </script>
+<?php }
 
 $pend = mysqli_real_escape_string($conn, $_POST['pendidikan']);
 if (isset($_POST['add'])) {

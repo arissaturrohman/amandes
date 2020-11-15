@@ -50,6 +50,12 @@
 <!-- /.content -->
 
 <?php
+if (!isset($_POST['add'])) {
+    ?>
+        <script>
+            window.location.href='404.html';
+        </script>
+<?php }
 
 $kec = mysqli_real_escape_string($conn, $_POST['kec']);
 if (isset($_POST['add'])) {

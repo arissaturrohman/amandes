@@ -64,6 +64,12 @@
 <!-- /.content -->
 
 <?php
+if (!isset($_POST['add'])) {
+    ?>
+        <script>
+            window.location.href='404.html';
+        </script>
+<?php }
 if (isset($_POST['add'])) {
 
 $username  = mysqli_real_escape_string($conn, $_POST['username']);

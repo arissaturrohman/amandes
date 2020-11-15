@@ -78,7 +78,8 @@
                         </td>
                         <td><?= $data['no_sk']; ?></td>
                         <td>
-                            <a href="?page=perdes&action=detail&id=<?= $data['id_perdes']; ?>" name="detail" class="badge badge-info">detail</a>
+                            <a href="?page=perdes&action=detail&id=<?= $data['id_perdes']; ?>" class="badge badge-info">detail</a>
+                            <a href="export.php" target="_blank" class="badge badge-warning">export</a>
 
                         </td>
                     </tr>
@@ -88,13 +89,6 @@
         </div>
         <!-- /.card-body -->
         <?php 
-        if (!isset($_POST['detail'])) {
-            ?>
-                <script>
-                    window.location.href='404.html';
-                </script>
-        <?php
-        }
         if(isset($_SESSION["login"])){            
         ?>
         <div class="card-footer">

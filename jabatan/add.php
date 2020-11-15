@@ -51,6 +51,13 @@
 
 <?php
 
+if (!isset($_POST['add'])) {
+    ?>
+        <script>
+            window.location.href='404.html';
+        </script>
+<?php }
+
 $jab = mysqli_real_escape_string($conn, $_POST['jabatan']);
 if (isset($_POST['add'])) {
     $sql = $conn->query("INSERT INTO tb_jabatan (jabatan) VALUES('$jab')");

@@ -37,7 +37,6 @@
                         <label for="kec">Kecamatan</label>
                           <select name="kec" id="kec" class="form-control" >
                           <?php 
-                          // $id_kec = $data_desa['id_kec'];
                           $sql_kec = $conn->query("SELECT * FROM tb_kec");
                           while($data_kec = $sql_kec->fetch_array()){
                           if ($data_desa['id_kec'] == $data_kec['id_kec']) {
@@ -73,8 +72,8 @@
 
 <?php
 
-$kec  = $_POST['kec'];
-$desa = $_POST['desa'];
+$kec  = mysqli_real_escape_string($conn, $_POST['kec']);
+$desa = mysqli_real_escape_string($conn, $_POST['desa']);
 if (isset($_POST['edit'])) {
     $sql = $conn->query("UPDATE tb_desa SET desa='$desa', id_kec='$kec' WHERE id_desa='$id_desa'");
     if ($sql) {

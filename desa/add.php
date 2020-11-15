@@ -61,8 +61,8 @@
 
 <?php
 
-$kec  = $_POST['kec'];
-$desa = $_POST['desa'];
+$kec  = mysqli_real_escape_string($conn, $_POST['kec']);
+$desa = mysqli_real_escape_string($conn, $_POST['desa']);
 if (isset($_POST['add'])) {
     $sql = $conn->query("INSERT INTO tb_desa (desa, id_kec) VALUES('$desa', '$kec')");
     if ($sql) {

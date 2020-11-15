@@ -14,6 +14,10 @@ if ($page == "perdes") {
         include "perdes/delete.php";
     } elseif ($action == "edit") {
         include "perdes/edit.php";
+    } elseif ($action == "edit_foto") {
+        include "perdes/edit_perdes.php";
+    } elseif ($action == "edit_sk") {
+        include "perdes/edit_sk.php";
     }
 } elseif ($page == "kec") {
     if ($action == "") {
@@ -54,6 +58,18 @@ if ($page == "perdes") {
         include "jabatan/edit.php";
     } elseif ($action == "delete") {
         include "jabatan/delete.php";
+    }
+} elseif ($page == "user") {
+    if ($action == "") {
+        include "user/user.php";
+    } elseif ($action == "add") {
+        include "user/add.php";
+    } elseif ($action == "edit") {
+        include "user/edit.php";
+    } elseif ($action == "delete") {
+        include "user/delete.php";
+    } elseif ($action == "pass") {
+        include "user/ganti_password.php";
     }
 } elseif ($page == "") {
     include "dashboard.php";

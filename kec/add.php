@@ -51,7 +51,7 @@
 
 <?php
 
-$kec = $_POST['kec'];
+$kec = mysqli_real_escape_string($conn, $_POST['kec']);
 if (isset($_POST['add'])) {
     $sql = $conn->query("INSERT INTO tb_kec (kec) VALUES('$kec')");
     if ($sql) {

@@ -56,7 +56,7 @@
 
 <?php
 
-$kec = $_POST['kec'];
+$kec = mysqli_real_escape_string($conn, $_POST['kec']);
 if (isset($_POST['edit'])) {
     $sql = $conn->query("UPDATE tb_kec SET kec='$kec' WHERE id_kec='$id_kec'");
     if ($sql) {

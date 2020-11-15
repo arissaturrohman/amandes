@@ -31,9 +31,10 @@
             </div>
         </div>
         <div class="card-body">
-            <table id="example2" class="table table-bordered table-hover">
+            <table id="example1" class="table table-bordered table-hover">
                 <thead>
                     <tr>
+                        <th>No</th>
                         <th>Kecamatan</th>
                         <th>Desa</th>
                         <th>Nama Perangkat</th>
@@ -43,26 +44,56 @@
                     </tr>
                 </thead>
                 <tbody>
+                <?php 
+                $no = 1;
+                $sql = $conn->query("SELECT * FROM tb_perdes WHERE status='Y'");
+                while($data = $sql->fetch_assoc()){
+                ?>
                     <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 4.0
-                        </td>
-                        <td>Win 95+</td>
-                        <td> 4</td>
-                        <td>X</td>
+                        <td><?= $no++; ?></td>
                         <td>
-                            <a href="?page=perdes&action=detail" class="badge badge-info">detail</a>
+                            <?php
+                             $id_kec = $data['id_kec'];
+                             $sql_kec = $conn->query("SELECT * FROM tb_kec WHERE id_kec=$id_kec");
+                             while($data_kec = $sql_kec->fetch_assoc()){
+                             echo $data_kec['kec']; ?>
+                             <?php } ?>
+                        </td>
+                        <td>
+                            <?php
+                             $id_desa = $data['id_desa'];
+                             $sql_desa = $conn->query("SELECT * FROM tb_desa WHERE id_desa=$id_desa");
+                             while($data_desa = $sql_desa->fetch_assoc()){
+                             echo $data_desa['desa']; ?>
+                             <?php }?>
+                        </td>
+                        <td><?= $data['nama']; ?></td>
+                        <td>
+                            <?php
+                             $id_jab = $data['id_jab'];
+                             $sql_jab = $conn->query("SELECT * FROM tb_jabatan WHERE id_jab=$id_jab");
+                             while($data_jab = $sql_jab->fetch_assoc()){
+                             echo $data_jab['jabatan']; ?>
+                             <?php }?>
+                        </td>
+                        <td><?= $data['no_sk']; ?></td>
+                        <td>
+                            <a href="?page=perdes&action=detail&id=<?= $data['id_perdes']; ?>" class="badge badge-info">detail</a>
 
                         </td>
                     </tr>
+                <?php } ?>
                 </tbody>
             </table>
         </div>
         <!-- /.card-body -->
+        <?php 
+        if(isset($_SESSION["login"])){            
+        ?>
         <div class="card-footer">
             <a href="?page=perdes&action=add" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Add Data</a>
         </div>
+          <?php } ?>
         <!-- /.card-footer-->
     </div>
     <!-- /.card -->

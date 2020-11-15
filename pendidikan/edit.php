@@ -56,7 +56,7 @@
 
 <?php
 
-$pend = $_POST['pendidikan'];
+$pend = mysqli_real_escape_string($conn, $_POST['pendidikan']);
 if (isset($_POST['edit'])) {
     $sql = $conn->query("UPDATE tb_pendidikan SET pendidikan='$pend' WHERE id_pend='$id_pend'");
     if ($sql) {

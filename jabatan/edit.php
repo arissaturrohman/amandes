@@ -56,7 +56,7 @@
 
 <?php
 
-$jab = $_POST['jabatan'];
+$jab = mysqli_real_escape_string($conn, $_POST['jabatan']);
 if (isset($_POST['edit'])) {
     $sql = $conn->query("UPDATE tb_jabatan SET jabatan='$jab' WHERE id_jab='$id_jab'");
     if ($sql) {

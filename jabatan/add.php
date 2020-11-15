@@ -51,7 +51,7 @@
 
 <?php
 
-$jab = $_POST['jabatan'];
+$jab = mysqli_real_escape_string($conn, $_POST['jabatan']);
 if (isset($_POST['add'])) {
     $sql = $conn->query("INSERT INTO tb_jabatan (jabatan) VALUES('$jab')");
     if ($sql) {

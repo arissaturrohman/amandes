@@ -51,7 +51,7 @@
 
 <?php
 
-$pend = $_POST['pendidikan'];
+$pend = mysqli_real_escape_string($conn, $_POST['pendidikan']);
 if (isset($_POST['add'])) {
     $sql = $conn->query("INSERT INTO tb_pendidikan (pendidikan) VALUES('$pend')");
     if ($sql) {

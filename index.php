@@ -58,24 +58,24 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
                     ?>
                 <li class="nav-item">
                     <a class="nav-link" href="login.php" role="button">
-                     Login
+                     <i class="fas fa-sign-in-alt"></i> Login
                     </a>
                 </li>
                 <?php } else{?>
                 <li class="nav-item">
                     <a class="nav-link" href="logout.php" role="button">
-                     Logout
+                     <i class="fas fa-sign-out-alt"></i> Logout
                     </a>
                 </li>
                 <?php } ?>
             </ul>
-            <ul class="navbar-nav">
+            <!-- <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>            
-            </ul>
+            </ul> -->
         </nav>
         <!-- /.navbar -->
 
@@ -95,7 +95,7 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="assets/img/logo.png" class="img-fluid" alt="User Image">
+                        <img src="assets/img/logo.png" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="index.php" class="d-block">
@@ -124,7 +124,7 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
                             <a href="?page=perdes" class="nav-link">
-                                <i class="nav-icon fas fa-file"></i>
+                                <i class="nav-icon fas fa-th-list"></i>
                                 <p>Data Perangkat Desa</p>
                             </a>
                         </li>
@@ -196,7 +196,7 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> 1.0.0
             </div>
-            <strong>Copyright &copy; 2014-2019 <a href="#">Kecamatan Gajah</a>.</strong> All rights
+            <strong>Copyright &copy; 2019-<?= date('Y'); ?> <a href="#">Kecamatan Gajah</a>.</strong> All rights
             reserved.
         </footer>
 

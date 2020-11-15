@@ -71,6 +71,13 @@
 <!-- /.content -->
 
 <?php
+if (!isset($_POST['edit'])) {
+    ?>
+        <script>
+            window.location.href='404.html';
+        </script>
+<?php
+}
 
 $kec  = mysqli_real_escape_string($conn, $_POST['kec']);
 $desa = mysqli_real_escape_string($conn, $_POST['desa']);

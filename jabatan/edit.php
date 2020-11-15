@@ -55,6 +55,13 @@
 <!-- /.content -->
 
 <?php
+if (!isset($_POST['edit'])) {
+    ?>
+        <script>
+            window.location.href='404.html';
+        </script>
+<?php
+}
 
 $jab = mysqli_real_escape_string($conn, $_POST['jabatan']);
 if (isset($_POST['edit'])) {

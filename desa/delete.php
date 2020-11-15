@@ -1,4 +1,12 @@
+
 <?php
+if (!isset($_POST['delete'])) {
+    ?>
+        <script>
+            window.location.href='404.html';
+        </script>
+<?php
+}
 $id_desa = $_GET['id'];
 $sql = $conn->query("DELETE FROM tb_desa WHERE id_desa='$id_desa'");
 ?>

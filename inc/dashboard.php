@@ -22,14 +22,19 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>150</h3>
+                <?php 
+                $kec = $conn->query("SELECT COUNT(kec) AS jumlah FROM tb_kec");
+                $data = $kec->fetch_assoc();
+                $jumlah_kec = $data['jumlah'];                
+                ?>
+                    <h3><?= $jumlah_kec; ?></h3>
 
-                    <p>New Orders</p>
+                    <p>Kecamatan</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-bag"></i>
+                    <i class="fas fa-city"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="?page=kec" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -37,14 +42,19 @@
             <!-- small box -->
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <?php 
+                $desa = $conn->query("SELECT COUNT(desa) AS jumlah FROM tb_desa");
+                $data = $desa->fetch_assoc();
+                $jumlah_desa = $data['jumlah'];
+                ?>
+                    <h3><?= $jumlah_desa; ?></h3>
 
-                    <p>Bounce Rate</p>
+                    <p>Desa</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
+                    <i class="fas fa-landmark"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="?page=desa" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -52,14 +62,19 @@
             <!-- small box -->
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>44</h3>
+                <?php 
+                $perdes = $conn->query("SELECT COUNT(nama) AS jumlah FROM tb_perdes");
+                $data = $perdes->fetch_assoc();
+                $jumlah_perdes = $data['jumlah'];
+                ?>
+                    <h3><?= $jumlah_perdes; ?></h3>
 
-                    <p>User Registrations</p>
+                    <p>Perangkat Desa</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-person-add"></i>
+                    <i class="ion ion-person"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="?page=perdes" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -67,14 +82,27 @@
             <!-- small box -->
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3>65</h3>
+                <?php 
+                $user = $conn->query("SELECT COUNT(username) AS jumlah FROM tb_user");
+                $data = $user->fetch_assoc();
+                $jumlah_user = $data['jumlah'];
+                ?>
+                    <h3><?= $jumlah_user; ?></h3>
 
-                    <p>Unique Visitors</p>
+                    <p>Users</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-pie-graph"></i>
+                    <i class="fas fa-users"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <?php 
+                $level = $_SESSION['level'];
+                if($level == 'admin'){            
+                ?>
+                <a href="?page=user" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <?php }
+                else{?>
+                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <?php } ?>
             </div>
         </div>
         <!-- ./col -->

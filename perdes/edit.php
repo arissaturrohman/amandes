@@ -186,7 +186,7 @@
           </div>
           <!-- /.card-body -->
           <div class="card-footer">
-              <button type="submit" name="add" class="btn btn-info">Submit</button>
+              <button type="submit" name="edit" class="btn btn-info">Submit</button>
               <a href="?page=perdes" class="btn btn-default float-right">Cancel</a>
           </div>
           <!-- /.card-footer -->
@@ -197,8 +197,15 @@
 <!-- /.content -->
 
 <?php
+if (!isset($_POST['edit'])) {
+  ?>
+      <script>
+          window.location.href='404.html';
+      </script>
+<?php
+}
 
-if (isset($_POST['add'])) {
+if (isset($_POST['edit'])) {
   $kec        = mysqli_real_escape_string($conn, $_POST['kec']);
   $desa       = mysqli_real_escape_string($conn, $_POST['desa']);
   $nama       = mysqli_real_escape_string($conn, $_POST['nama']);

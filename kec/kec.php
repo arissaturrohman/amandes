@@ -36,7 +36,12 @@
                     <tr>
                         <th class="align-middle" width="5%">No</th>
                         <th>Nama Kecamatan</th>
+                        <?php 
+                        $level = $_SESSION['level'];
+                        if($level == 'admin'){            
+                        ?>
                         <th class="align-middle" width="10%">Action</th>
+                        <?php } ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,20 +53,29 @@
                     <tr>
                         <td class="align-middle"><?= $no++; ?></td>
                         <td><?= $data['kec']; ?></td>
+                        <?php 
+                        $level = $_SESSION['level'];
+                        if($level == 'admin'){            
+                        ?>
                         <td>
                             <a href="?page=kec&action=edit&id=<?= $data['id_kec']; ?>" class="badge badge-success">edit</a>
-                            <a href="?page=kec&action=delete&id=<?= $data['id_kec']; ?>" onclick="return confirm('Apakah anda yakin menghapus data ini...?')" class="badge badge-danger">delete</a>
-
+                            <a href="?page=kec&action=delete&id=<?= $data['id_kec']; ?>" name="delete" onclick="return confirm('Apakah anda yakin menghapus data ini...?')" class="badge badge-danger">delete</a>
                         </td>
+                        <?php } ?>
                     </tr>
                 <?php } ?>
                 </tbody>
             </table>
         </div>
         <!-- /.card-body -->
+        <?php 
+        $level = $_SESSION['level'];
+        if($level == 'admin'){            
+        ?>
         <div class="card-footer">
             <a href="?page=kec&action=add" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Add Data</a>
         </div>
+        <?php } ?>
         <!-- /.card-footer-->
     </div>
     <!-- /.card -->

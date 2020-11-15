@@ -50,7 +50,7 @@
                             <td><?= $data['pendidikan']; ?></td>
                             <td>
                                 <a href="?page=pendidikan&action=edit&id=<?= $data['id_pend']; ?>" class="badge badge-success">edit</a>
-                                <a href="?page=pendidikan&action=delete&id=<?= $data['id_pend']; ?>" onclick="return confirm('Apakah anda yakin menghapus data ini...?')" class="badge badge-danger">delete</a>
+                                <a href="?page=pendidikan&action=delete&id=<?= $data['id_pend']; ?>" name="delete" onclick="return confirm('Apakah anda yakin menghapus data ini...?')" class="badge badge-danger">delete</a>
 
                             </td>
                         </tr>

@@ -178,7 +178,7 @@ $data = $sql->fetch_assoc();
         if(isset($_SESSION["login"])){
         ?>
       <a href="?page=perdes&action=edit&id=<?= $data['id_perdes']; ?>" class="btn btn-primary"><i class="fas fa-edit"></i> Edit Data</a>
-      <a href="?page=perdes&action=delete&id=<?= $data['id_perdes']; ?>" onclick="return confirm('Apakah anda yakin menghapus data ini...?')" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete Data</a>
+      <a href="?page=perdes&action=delete&id=<?= $data['id_perdes']; ?>" name="delete" onclick="return confirm('Apakah anda yakin menghapus data ini...?')" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete Data</a>
         <?php } ?>
       <a href="?page=perdes" class="btn btn-default float-right">Cancel</a>
   </div>

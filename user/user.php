@@ -76,7 +76,7 @@
                               <label class="custom-control-label" for="customSwitch1" ></label>
                             </div> -->
                               <a href="?page=user&action=edit&id=<?=$data['id_user'];?>" class="badge badge-success">edit</a>                              
-                              <a href="?page=user&action=delete&id=<?=$data['id_user'];?>" onclick="return confirm('Apakah anda yakin menghapus data ini...?')" class="badge badge-danger">delete</a>
+                              <a href="?page=user&action=delete&id=<?=$data['id_user'];?>" name="delete" onclick="return confirm('Apakah anda yakin menghapus data ini...?')" class="badge badge-danger">delete</a>
                               <?php 
                                 if ($data['status'] == 'Y') {
                                   $icon =  "fas fa-lock-open";

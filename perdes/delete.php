@@ -1,4 +1,11 @@
 <?php
+if (!isset($_POST['delete'])) {
+    ?>
+        <script>
+            window.location.href='404.html';
+        </script>
+<?php
+}
 $id_perdes = $_GET['id'];
 $sql = $conn->query("SELECT * FROM tb_perdes WHERE id_perdes=$id_perdes");
 $data = $sql->fetch_assoc();

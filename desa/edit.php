@@ -1,3 +1,11 @@
+<?php
+if (!isset($_SESSION["login"])) {
+?>
+    <script>
+        window.location.href = '404.html';
+    </script>
+<?php
+} ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -28,33 +36,33 @@
                 <!-- form start -->
                 <form class="form-horizontal" method="POST">
                     <div class="card-body">
-                      <?php 
-                      $id_desa = $_GET['id'];
-                      $sql = $conn->query("SELECT * FROM tb_desa WHERE id_desa='$id_desa'");
-                      $data_desa = $sql->fetch_assoc();
-                      ?>
-                      <div class="form-group">
-                        <label for="kec">Kecamatan</label>
-                          <select name="kec" id="kec" class="form-control" >
-                          <?php 
-                          $sql_kec = $conn->query("SELECT * FROM tb_kec");
-                          while($data_kec = $sql_kec->fetch_array()){
-                          if ($data_desa['id_kec'] == $data_kec['id_kec']) {
-                            $select = "selected";
-                          } else {
-                            $select = "";
-                          }
-                          echo "<option value='$data_kec[id_kec]' $select>".$data_kec['kec']."</option";
-                          
-                          ?>
-                          <option value="<?= $data_kec['id_kec']; ?>"><?= $data_kec['kec']; ?></option>
-                          <?php } ?>
-                          </select>
-                      </div>
-                      <div class="form-group">
-                          <label for="desa">Desa</label>
-                              <input type="text" class="form-control" id="desa" name="desa" value="<?= $data_desa['desa']; ?>">                          
-                      </div>
+                        <?php
+                        $id_desa = $_GET['id'];
+                        $sql = $conn->query("SELECT * FROM tb_desa WHERE id_desa='$id_desa'");
+                        $data_desa = $sql->fetch_assoc();
+                        ?>
+                        <div class="form-group">
+                            <label for="kec">Kecamatan</label>
+                            <select name="kec" id="kec" class="form-control">
+                                <?php
+                                $sql_kec = $conn->query("SELECT * FROM tb_kec");
+                                while ($data_kec = $sql_kec->fetch_array()) {
+                                    if ($data_desa['id_kec'] == $data_kec['id_kec']) {
+                                        $select = "selected";
+                                    } else {
+                                        $select = "";
+                                    }
+                                    echo "<option value='$data_kec[id_kec]' $select>" . $data_kec['kec'] . "</option";
+
+                                ?>
+                                    <option value="<?= $data_kec['id_kec']; ?>"><?= $data_kec['kec']; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="desa">Desa</label>
+                            <input type="text" class="form-control" id="desa" name="desa" value="<?= $data_desa['desa']; ?>">
+                        </div>
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
@@ -71,13 +79,6 @@
 <!-- /.content -->
 
 <?php
-if (!isset($_POST['edit'])) {
-    ?>
-        <script>
-            window.location.href='404.html';
-        </script>
-<?php
-}
 
 $kec  = mysqli_real_escape_string($conn, $_POST['kec']);
 $desa = mysqli_real_escape_string($conn, $_POST['desa']);

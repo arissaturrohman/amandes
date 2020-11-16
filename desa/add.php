@@ -1,3 +1,11 @@
+<?php
+if (!isset($_SESSION["login"])) {
+?>
+    <script>
+        window.location.href = '404.html';
+    </script>
+<?php
+} ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -60,24 +68,18 @@
 <!-- /.content -->
 
 <?php
-if (!isset($_POST['add'])) {
+$kec  = mysqli_real_escape_string($conn, $_POST['kec']);
+$desa = mysqli_real_escape_string($conn, $_POST['desa']);
+if (isset($_POST['add'])) {
+    $sql = $conn->query("INSERT INTO tb_desa (desa, id_kec) VALUES('$desa', '$kec')");
+    if ($sql) {
 ?>
-    <script>
-        window.location.href = '404.html';
-    </script>
-    <?php } else {
-    $kec  = mysqli_real_escape_string($conn, $_POST['kec']);
-    $desa = mysqli_real_escape_string($conn, $_POST['desa']);
-    if (isset($_POST['add'])) {
-        $sql = $conn->query("INSERT INTO tb_desa (desa, id_kec) VALUES('$desa', '$kec')");
-        if ($sql) {
-    ?>
-            <script>
-                alert("Data berhasil ditambah...!");
-                window.location.href = "?page=desa";
-            </script>
+        <script>
+            alert("Data berhasil ditambah...!");
+            window.location.href = "?page=desa";
+        </script>
 <?php
-        }
     }
 }
+
 ?>

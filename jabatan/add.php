@@ -52,22 +52,23 @@
 <?php
 
 if (!isset($_POST['add'])) {
-    ?>
-        <script>
-            window.location.href='404.html';
-        </script>
-<?php }
-
-$jab = mysqli_real_escape_string($conn, $_POST['jabatan']);
-if (isset($_POST['add'])) {
-    $sql = $conn->query("INSERT INTO tb_jabatan (jabatan) VALUES('$jab')");
-    if ($sql) {
 ?>
-        <script>
-            alert("Data berhasil ditambah...!");
-            window.location.href = "?page=jabatan";
-        </script>
+    <script>
+        window.location.href = '404.html';
+    </script>
+    <?php } else {
+
+    $jab = mysqli_real_escape_string($conn, $_POST['jabatan']);
+    if (isset($_POST['add'])) {
+        $sql = $conn->query("INSERT INTO tb_jabatan (jabatan) VALUES('$jab')");
+        if ($sql) {
+    ?>
+            <script>
+                alert("Data berhasil ditambah...!");
+                window.location.href = "?page=jabatan";
+            </script>
 <?php
+        }
     }
 }
 

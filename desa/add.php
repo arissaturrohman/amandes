@@ -28,22 +28,22 @@
                 <!-- form start -->
                 <form class="form-horizontal" method="POST">
                     <div class="card-body">
-                      <?php 
-                      $sql = $conn->query("SELECT * FROM tb_kec");                      
-                      ?>
-                      <div class="form-group">
-                        <label for="kec">Kecamatan</label>
-                          <select name="kec" id="kec" class="form-control" >
-                            <option value="">Pilih Kecamatan</option>
-                            <?php while($data = $sql->fetch_assoc()){ ?>
-                              <option value="<?= $data['id_kec']; ?>"><?= $data['kec']; ?></option>
-                            <?php } ?>
-                          </select>
-                      </div>
-                      <div class="form-group">
-                          <label for="desa">Desa</label>
-                              <input type="text" class="form-control" id="desa" name="desa" placeholder="Desa">                          
-                      </div>
+                        <?php
+                        $sql = $conn->query("SELECT * FROM tb_kec");
+                        ?>
+                        <div class="form-group">
+                            <label for="kec">Kecamatan</label>
+                            <select name="kec" id="kec" class="form-control">
+                                <option value="">Pilih Kecamatan</option>
+                                <?php while ($data = $sql->fetch_assoc()) { ?>
+                                    <option value="<?= $data['id_kec']; ?>"><?= $data['kec']; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="desa">Desa</label>
+                            <input type="text" class="form-control" id="desa" name="desa" placeholder="Desa">
+                        </div>
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
@@ -60,19 +60,24 @@
 <!-- /.content -->
 
 <?php
-
-$kec  = mysqli_real_escape_string($conn, $_POST['kec']);
-$desa = mysqli_real_escape_string($conn, $_POST['desa']);
-if (isset($_POST['add'])) {
-    $sql = $conn->query("INSERT INTO tb_desa (desa, id_kec) VALUES('$desa', '$kec')");
-    if ($sql) {
+if (!isset($_POST['add'])) {
 ?>
-        <script>
-            alert("Data berhasil ditambah...!");
-            window.location.href = "?page=desa";
-        </script>
+    <script>
+        window.location.href = '404.html';
+    </script>
+    <?php } else {
+    $kec  = mysqli_real_escape_string($conn, $_POST['kec']);
+    $desa = mysqli_real_escape_string($conn, $_POST['desa']);
+    if (isset($_POST['add'])) {
+        $sql = $conn->query("INSERT INTO tb_desa (desa, id_kec) VALUES('$desa', '$kec')");
+        if ($sql) {
+    ?>
+            <script>
+                alert("Data berhasil ditambah...!");
+                window.location.href = "?page=desa";
+            </script>
 <?php
+        }
     }
 }
-
 ?>

@@ -51,23 +51,23 @@
 
 <?php
 if (!isset($_POST['add'])) {
-    ?>
-        <script>
-            window.location.href='404.html';
-        </script>
-<?php }
-
-$pend = mysqli_real_escape_string($conn, $_POST['pendidikan']);
-if (isset($_POST['add'])) {
-    $sql = $conn->query("INSERT INTO tb_pendidikan (pendidikan) VALUES('$pend')");
-    if ($sql) {
 ?>
-        <script>
-            alert("Data berhasil ditambah...!");
-            window.location.href = "?page=pendidikan";
-        </script>
+    <script>
+        window.location.href = '404.html';
+    </script>
+    <?php } else {
+
+    $pend = mysqli_real_escape_string($conn, $_POST['pendidikan']);
+    if (isset($_POST['add'])) {
+        $sql = $conn->query("INSERT INTO tb_pendidikan (pendidikan) VALUES('$pend')");
+        if ($sql) {
+    ?>
+            <script>
+                alert("Data berhasil ditambah...!");
+                window.location.href = "?page=pendidikan";
+            </script>
 <?php
+        }
     }
 }
-
 ?>

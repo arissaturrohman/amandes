@@ -28,26 +28,26 @@
                 <!-- form start -->
                 <form class="form-horizontal" method="POST">
                     <div class="card-body">
-                      <div class="form-group">
-                          <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Username">                          
-                      </div>
-                      <div class="form-group">
-                          <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="password">                          
-                      </div>
-                      <div class="form-group">
-                          <label for="nama">Nama Desa</label>
-                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Desa">                          
-                      </div>
-                      <div class="form-group">
-                      <label for="level">Level</label>
-                        <select name="level" class="form-control" required>
-                            <option>Pilih Level</option>
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
-                        </select>
-                      </div>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="nama">Nama Desa</label>
+                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Desa">
+                        </div>
+                        <div class="form-group">
+                            <label for="level">Level</label>
+                            <select name="level" class="form-control" required>
+                                <option>Pilih Level</option>
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                            </select>
+                        </div>
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
@@ -65,20 +65,20 @@
 
 <?php
 if (!isset($_POST['add'])) {
-    ?>
-        <script>
-            window.location.href='404.html';
-        </script>
-<?php }
-if (isset($_POST['add'])) {
+?>
+    <script>
+        window.location.href = '404.html';
+    </script>
+    <?php } else {
+    if (isset($_POST['add'])) {
 
-$username  = mysqli_real_escape_string($conn, $_POST['username']);
-$nama      = mysqli_real_escape_string($conn, $_POST['nama']);
-$level     = mysqli_real_escape_string($conn, $_POST['level']);
-$status    = "Y";
-    //enkripsi password
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
-    $sql = $conn->query("INSERT INTO tb_user (username, password, nama, level, status) VALUES(        
+        $username  = mysqli_real_escape_string($conn, $_POST['username']);
+        $nama      = mysqli_real_escape_string($conn, $_POST['nama']);
+        $level     = mysqli_real_escape_string($conn, $_POST['level']);
+        $status    = "Y";
+        //enkripsi password
+        $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+        $sql = $conn->query("INSERT INTO tb_user (username, password, nama, level, status) VALUES(        
         '$username',
         '$password',
         '$nama',
@@ -86,14 +86,14 @@ $status    = "Y";
         '$status'
     )");
 
-    if ($sql) {
-        ?>
-        <script type="text/javascript">
-          alert("User berhasil ditambahkan..!");
-          window.location.href="?page=user";
-        </script>
-        <?php
+        if ($sql) {
+    ?>
+            <script type="text/javascript">
+                alert("User berhasil ditambahkan..!");
+                window.location.href = "?page=user";
+            </script>
+<?php
+        }
     }
 }
-
 ?>

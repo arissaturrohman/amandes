@@ -43,53 +43,53 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php 
-                $no = 1;
-                $sql = $conn->query("SELECT * FROM tb_user");
-                while ($data = $sql->fetch_assoc()) {
-                ?>
-                    <tr>
-                        <td class="align-middle text-center"><?= $no++; ?></td>
-                        <td><?= $data['nama']; ?></td>
-                        <td><?= $data['username']; ?></td>
-                        <td><?= $data['level']; ?></td>
-                        <td>
-                          <?php 
-                          if ($data['status'] == 'Y') {
-                            echo "Aktif";
-                          } else {
-                            echo "Tidak Aktif";
-                          }
-                          ?>
-                        </td>
-                        <td>
-                        <?php 
-                        $level = $_SESSION['id_user'];
-                        if ($level == $data['id_user']) {
-                        ?>
-                        <button type="button" class="btn btn-block btn-default disabled"><i class="fas fa-exclamation-triangle"></i> Disabled</button>
-                        <?php } else { ?>
-                          
-                            <!-- <div class="custom-control custom-switch">
-                              <input type="checkbox" class="custom-control-input" id="customSwitch1" name="status" value="Y" <?php if (in_array("Y", $data)) echo "checked";?>>
-                              <input type="checkbox" class="custom-control-input" id="customSwitch1" name="status" value="N" <?php if (in_array("N", $data));?>>                              
+                    <?php
+                    $no = 1;
+                    $sql = $conn->query("SELECT * FROM tb_user");
+                    while ($data = $sql->fetch_assoc()) {
+                    ?>
+                        <tr>
+                            <td class="align-middle text-center"><?= $no++; ?></td>
+                            <td><?= $data['nama']; ?></td>
+                            <td><?= $data['username']; ?></td>
+                            <td><?= $data['level']; ?></td>
+                            <td>
+                                <?php
+                                if ($data['status'] == 'Y') {
+                                    echo "Aktif";
+                                } else {
+                                    echo "Tidak Aktif";
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <?php
+                                $level = $_SESSION['id_user'];
+                                if ($level == $data['id_user']) {
+                                ?>
+                                    <button type="button" class="btn btn-block btn-default disabled"><i class="fas fa-exclamation-triangle"></i> Disabled</button>
+                                <?php } else { ?>
+
+                                    <!-- <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input" id="customSwitch1" name="status" value="Y" <?php if (in_array("Y", $data)) echo "checked"; ?>>
+                              <input type="checkbox" class="custom-control-input" id="customSwitch1" name="status" value="N" <?php if (in_array("N", $data)); ?>>                              
                               <label class="custom-control-label" for="customSwitch1" ></label>
                             </div> -->
-                              <a href="?page=user&action=edit&id=<?=$data['id_user'];?>" class="badge badge-success">edit</a>                              
-                              <a href="?page=user&action=delete&id=<?=$data['id_user'];?>" name="delete" onclick="return confirm('Apakah anda yakin menghapus data ini...?')" class="badge badge-danger">delete</a>
-                              <?php 
-                                if ($data['status'] == 'Y') {
-                                  $icon =  "fas fa-lock-open";
-                                } else {
-                                  $icon =  "fas fa-lock";
-                                }
-                                echo"<a href='?page=user&action=pass&id=$data[id_user]' class='badge badge-info' title='ganti password'><i class='$icon'></i></a>";
-                                ?>
-                              
-                        <?php } ?>
-                        </td>
-                    </tr>
-                <?php } ?>
+                                    <a href="?page=user&action=edit&id=<?= $data['id_user']; ?>" class="badge badge-success">edit</a>
+                                    <!-- <a href="?page=user&action=delete&id=<?= $data['id_user']; ?>" name="delete" onclick="return confirm('Apakah anda yakin menghapus data ini...?')" class="badge badge-danger">delete</a> -->
+                                    <?php
+                                    if ($data['status'] == 'Y') {
+                                        $icon =  "fas fa-lock-open";
+                                    } else {
+                                        $icon =  "fas fa-lock";
+                                    }
+                                    echo "<a href='?page=user&action=pass&id=$data[id_user]' class='badge badge-info' title='ganti password'><i class='$icon'></i></a>";
+                                    ?>
+
+                                <?php } ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>

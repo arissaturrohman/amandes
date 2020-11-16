@@ -1,11 +1,11 @@
 <?php
-if (!isset($_POST['delete'])) {
+if (!isset($_SESSION["login"])) {
 ?>
     <script>
         window.location.href = '404.html';
     </script>
 <?php
-} else {
+} 
     $id_perdes = $_GET['id'];
     $sql = $conn->query("SELECT * FROM tb_perdes WHERE id_perdes=$id_perdes");
     $data = $sql->fetch_assoc();
@@ -23,4 +23,3 @@ if (!isset($_POST['delete'])) {
         alert("Data berhasil dihapus...!");
         window.location.href = "?page=perdes";
     </script>
-<?php } ?>

@@ -1,17 +1,16 @@
 <?php
-if (!isset($_POST['delete'])) {
+if (!isset($_SESSION["login"])) {
 ?>
     <script>
         window.location.href = '404.html';
     </script>
 <?php
-} else {
-    $id_jab = $_GET['id'];
-    $sql = $conn->query("DELETE FROM tb_jabatan WHERE id_jab='$id_jab'");
+} 
+$id_jab = $_GET['id'];
+$sql = $conn->query("DELETE FROM tb_jabatan WHERE id_jab='$id_jab'");
 ?>
 
-    <script>
-        alert("Data berhasil dihapus...!");
-        window.location.href = "?page=jabatan";
-    </script>
-<?php } ?>
+<script>
+    alert("Data berhasil dihapus...!");
+    window.location.href = "?page=jabatan";
+</script>

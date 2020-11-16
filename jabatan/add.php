@@ -1,3 +1,11 @@
+<?php
+if (!isset($_SESSION["login"])) {
+?>
+    <script>
+        window.location.href = '404.html';
+    </script>
+<?php
+} ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -51,25 +59,18 @@
 
 <?php
 
-if (!isset($_POST['add'])) {
+$jab = mysqli_real_escape_string($conn, $_POST['jabatan']);
+if (isset($_POST['add'])) {
+    $sql = $conn->query("INSERT INTO tb_jabatan (jabatan) VALUES('$jab')");
+    if ($sql) {
 ?>
-    <script>
-        window.location.href = '404.html';
-    </script>
-    <?php } else {
-
-    $jab = mysqli_real_escape_string($conn, $_POST['jabatan']);
-    if (isset($_POST['add'])) {
-        $sql = $conn->query("INSERT INTO tb_jabatan (jabatan) VALUES('$jab')");
-        if ($sql) {
-    ?>
-            <script>
-                alert("Data berhasil ditambah...!");
-                window.location.href = "?page=jabatan";
-            </script>
+        <script>
+            alert("Data berhasil ditambah...!");
+            window.location.href = "?page=jabatan";
+        </script>
 <?php
-        }
     }
 }
+
 
 ?>

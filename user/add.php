@@ -1,3 +1,11 @@
+<?php
+if (!isset($_SESSION["login"])) {
+?>
+    <script>
+        window.location.href = '404.html';
+    </script>
+<?php
+} ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -64,12 +72,6 @@
 <!-- /.content -->
 
 <?php
-if (!isset($_POST['add'])) {
-?>
-    <script>
-        window.location.href = '404.html';
-    </script>
-    <?php } else {
     if (isset($_POST['add'])) {
 
         $username  = mysqli_real_escape_string($conn, $_POST['username']);
@@ -95,5 +97,5 @@ if (!isset($_POST['add'])) {
 <?php
         }
     }
-}
+
 ?>

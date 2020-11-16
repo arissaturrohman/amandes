@@ -1,3 +1,11 @@
+<?php
+if (!isset($_SESSION["login"])) {
+?>
+    <script>
+        window.location.href = '404.html';
+    </script>
+<?php
+} ?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -55,13 +63,6 @@
 <!-- /.content -->
 
 <?php
-if (!isset($_POST['edit'])) {
-    ?>
-        <script>
-            window.location.href='404.html';
-        </script>
-<?php
-}
 
 $pend = mysqli_real_escape_string($conn, $_POST['pendidikan']);
 if (isset($_POST['edit'])) {

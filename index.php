@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 include("inc/config.php");
 include("inc/tgl_indo.php");
 error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
@@ -18,8 +19,8 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
     <!-- Font Awesome -->
     <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
     <!-- DataTables -->
-  <link rel="stylesheet" href="assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- overlayScrollbars -->
@@ -27,15 +28,15 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
     <link rel="stylesheet" href="assets/dist/css/ekko-lightbox.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    
+
     <script>
-      $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-                event.preventDefault();
-                $(this).ekkoLightbox();
-            });
+        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+            event.preventDefault();
+            $(this).ekkoLightbox();
+        });
     </script>
 
-    
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -52,21 +53,20 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <?php 
-                session_start();
-                    if(!isset($_SESSION["login"])){
-                    ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php" role="button">
-                     <i class="fas fa-sign-in-alt"></i> Login
-                    </a>
-                </li>
-                <?php } else{?>
-                <li class="nav-item">
-                    <a class="nav-link" href="logout.php" role="button">
-                     <i class="fas fa-sign-out-alt"></i> Logout
-                    </a>
-                </li>
+                <?php
+                if (!isset($_SESSION["login"])) {
+                ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php" role="button">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </li>
+                <?php } else { ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php" role="button">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </li>
                 <?php } ?>
             </ul>
             <!-- <ul class="navbar-nav">
@@ -89,28 +89,28 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 
             <!-- Sidebar -->
             <div class="sidebar">
-            <?php 
-            if(isset($_SESSION["login"])){
-            ?>
-                <!-- Sidebar user (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="assets/img/logo.png" alt="User Image">
+                <?php
+                if (isset($_SESSION["login"])) {
+                ?>
+                    <!-- Sidebar user (optional) -->
+                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                        <div class="image">
+                            <img src="assets/img/logo.png" alt="User Image">
+                        </div>
+                        <div class="info">
+                            <a href="index.php" class="d-block">
+                                <?php
+                                $level = $_SESSION['level'] == 'admin';
+                                if ($level) {
+                                    echo "Administrator";
+                                } else {
+                                    echo $_SESSION['nama'];
+                                }
+                                ?>
+                            </a>
+                        </div>
                     </div>
-                    <div class="info">
-                        <a href="index.php" class="d-block">
-                        <?php 
-                        $level = $_SESSION['level'] == 'admin'; 
-                        if ($level) {
-                            echo "Administrator";
-                        } else {
-                            echo $_SESSION['nama'];
-                        }
-                        ?>
-                        </a>
-                    </div>
-                </div>
-            <?php } ?>
+                <?php } ?>
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -128,54 +128,54 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
                                 <p>Data Perangkat Desa</p>
                             </a>
                         </li>
-                        <?php 
-                        if(isset($_SESSION["login"])){
+                        <?php
+                        if (isset($_SESSION["login"])) {
                         ?>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-cogs"></i>
-                                <p>
-                                    Setting
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="?page=kec" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Kecamatan</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="?page=desa" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Desa</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="?page=jabatan" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Jabatan</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="?page=pendidikan" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Pendidikan</p>
-                                    </a>
-                                </li>
-                                <?php 
-                                if($_SESSION["level"] == "admin"){
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-cogs"></i>
+                                    <p>
+                                        Setting
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="?page=kec" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Kecamatan</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="?page=desa" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Desa</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="?page=jabatan" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Jabatan</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="?page=pendidikan" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Pendidikan</p>
+                                        </a>
+                                    </li>
+                                    <?php
+                                    if ($_SESSION["level"] == "admin") {
                                     ?>
-                                <li class="nav-item">
-                                    <a href="?page=user" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>User</p>
-                                    </a>
-                                </li>
-                                <?php } ?>
-                            </ul>
-                        </li>
+                                        <li class="nav-item">
+                                            <a href="?page=user" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>User</p>
+                                            </a>
+                                        </li>
+                                    <?php } ?>
+                                </ul>
+                            </li>
                         <?php } ?>
                     </ul>
                 </nav>
@@ -221,60 +221,60 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
     <script src="assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    
+
     <!-- AdminLTE for demo purposes -->
     <script src="assets/dist/js/demo.js"></script>
 
     <script>
-    $(document).ready(function(){
-      $('#kec').change(function(){
-        var kecamatan = $(this).val();
+        $(document).ready(function() {
+            $('#kec').change(function() {
+                var kecamatan = $(this).val();
 
-          $.ajax({
-            type: 'POST',
-            url: 'autoload.php',
-            data: 'id_kec='+kecamatan,
-            success: function(msg) {
-              $('#desa').html(msg);
-            }
-          });
-      })
-    });
-  </script>
-  <script>    
-    $(".custom-file-input").on("change", function() {
-      var fileName = $(this).val().split("\\").pop();
-      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    });
-  </script>
+                $.ajax({
+                    type: 'POST',
+                    url: 'autoload.php',
+                    data: 'id_kec=' + kecamatan,
+                    success: function(msg) {
+                        $('#desa').html(msg);
+                    }
+                });
+            })
+        });
+    </script>
+    <script>
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
 
-<script>
-    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+    <script>
+        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
             event.preventDefault();
             $(this).ekkoLightbox();
         });
-</script>
+    </script>
 
-<script>
-    $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-      "ordering": false,
-    });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": false,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "autoWidth": false,
+                "ordering": false,
+            });
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": false,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
 
-<!-- <script>
+    <!-- <script>
 $('input[type="checkbox"]').click(function(){ 
     if($(this).prop("checked")){ 
         $(this).val("Y");
@@ -291,7 +291,7 @@ $('input[type="checkbox"]').click(function(){
     }
 });
 </script> -->
-   
+
 </body>
 
 </html>

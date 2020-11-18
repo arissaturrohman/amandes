@@ -1,9 +1,9 @@
 <?php
 if (!isset($_SESSION["login"])) {
 ?>
-    <script>
-        window.location.href = '404.html';
-    </script>
+  <script>
+    window.location.href = '404.html';
+  </script>
 <?php
 } ?>
 <!-- Content Header (Page header) -->
@@ -117,6 +117,16 @@ if (!isset($_SESSION["login"])) {
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
+            <label for="siltap">Penghasilan</label>
+            <input type="text" class="form-control" name="siltap" id="siltap" placeholder="Penghasilan" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="tunj">Tunjangan Lainnya</label>
+            <input type="text" class="form-control" name="tunj" id="tunj" placeholder="Tunjangan Lainnya" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
             <label for="foto_perdes">Foto Perangkat Desa</label>
             <div class="custom-file">
               <input type="file" name="foto_perdes" class="custom-file-input" id="customFile" required>
@@ -161,38 +171,40 @@ if (!isset($_SESSION["login"])) {
 
 <?php
 
-  if (isset($_POST['add'])) {
-    $kec        = mysqli_real_escape_string($conn, $_POST['kec']);
-    $desa       = mysqli_real_escape_string($conn, $_POST['desa']);
-    $nama       = mysqli_real_escape_string($conn, $_POST['nama']);
-    $tempat     = mysqli_real_escape_string($conn, $_POST['tempat']);
-    $tgl_lahir  = mysqli_real_escape_string($conn, $_POST['tgl_lahir']);
-    $jk         = mysqli_real_escape_string($conn, $_POST['jk']);
-    $pendidikan = mysqli_real_escape_string($conn, $_POST['pendidikan']);
-    $jabatan    = mysqli_real_escape_string($conn, $_POST['jabatan']);
-    $no_sk      = mysqli_real_escape_string($conn, $_POST['no_sk']);
-    $tmt        = mysqli_real_escape_string($conn, $_POST['tmt']);
-    $alamat     = mysqli_real_escape_string($conn, $_POST['alamat']);
-    $status     = "Y";
+if (isset($_POST['add'])) {
+  $kec        = mysqli_real_escape_string($conn, $_POST['kec']);
+  $desa       = mysqli_real_escape_string($conn, $_POST['desa']);
+  $nama       = mysqli_real_escape_string($conn, $_POST['nama']);
+  $tempat     = mysqli_real_escape_string($conn, $_POST['tempat']);
+  $tgl_lahir  = mysqli_real_escape_string($conn, $_POST['tgl_lahir']);
+  $jk         = mysqli_real_escape_string($conn, $_POST['jk']);
+  $pendidikan = mysqli_real_escape_string($conn, $_POST['pendidikan']);
+  $jabatan    = mysqli_real_escape_string($conn, $_POST['jabatan']);
+  $no_sk      = mysqli_real_escape_string($conn, $_POST['no_sk']);
+  $tmt        = mysqli_real_escape_string($conn, $_POST['tmt']);
+  $alamat     = mysqli_real_escape_string($conn, $_POST['alamat']);
+  $siltap     = mysqli_real_escape_string($conn, $_POST['siltap']);
+  $tunj       = mysqli_real_escape_string($conn, $_POST['tunj']);
+  $status     = "Y";
 
-    $gambar1  = $_FILES['foto_perdes']['name'];
-    $gambar2  = explode(".", $_FILES['foto_sk']['name']);
-    $source1  = $_FILES['foto_perdes']['tmp_name'];
-    $source2  = $_FILES['foto_sk']['tmp_name'];
-    $size   = $_FILES['foto_perdes']['size'];
-    $eks      = array('jpg', 'jpeg', 'png', 'pdf');
-    $y        = explode('.', $gambar1);
-    $ekstensi = strtolower(end($y));
-    $folder   = 'assets/img/';
-    $baru1    = date('dmYHis') . $gambar1;
-    $baru2    = round(microtime(true)) . '.' . end($gambar2);
+  $gambar1  = $_FILES['foto_perdes']['name'];
+  $gambar2  = explode(".", $_FILES['foto_sk']['name']);
+  $source1  = $_FILES['foto_perdes']['tmp_name'];
+  $source2  = $_FILES['foto_sk']['tmp_name'];
+  $size   = $_FILES['foto_perdes']['size'];
+  $eks      = array('jpg', 'jpeg', 'png', 'pdf');
+  $y        = explode('.', $gambar1);
+  $ekstensi = strtolower(end($y));
+  $folder   = 'assets/img/';
+  $baru1    = date('dmYHis') . $gambar1;
+  $baru2    = round(microtime(true)) . '.' . end($gambar2);
 
-    if (in_array($ekstensi, $eks) === true) {
-      if ($size > 2048) {
-        move_uploaded_file($source1, $folder . $baru1);
-        move_uploaded_file($source2, $folder . $baru2);
+  if (in_array($ekstensi, $eks) === true) {
+    if ($size > 2048) {
+      move_uploaded_file($source1, $folder . $baru1);
+      move_uploaded_file($source2, $folder . $baru2);
 
-        $sql = $conn->query("INSERT INTO tb_perdes (id_kec, id_desa, id_pend, id_jab, nama, jk, tempat, tgl_lahir, alamat, no_sk, tmt, foto_perdes, foto_sk, status)
+      $sql = $conn->query("INSERT INTO tb_perdes (id_kec, id_desa, id_pend, id_jab, nama, jk, tempat, tgl_lahir, alamat, no_sk, tmt, foto_perdes, foto_sk, siltap, tunj, status)
           VALUES (
                 '$kec',                
                 '$desa',                
@@ -207,31 +219,33 @@ if (!isset($_SESSION["login"])) {
                 '$tmt',                
                 '$baru1',
                 '$baru2',
+                '$siltap',
+                '$tunj',
                 '$status'
                   )");
-        if ($sql) {
-  ?>
-          <script>
-            alert("Data berhasil ditambah...!");
-            window.location.href = "?page=perdes";
-          </script>
-        <?php
-
-        }
-      } else {
-        ?>
+      if ($sql) {
+?>
         <script>
-          alert("Ukuran terlalu besar...!");
+          alert("Data berhasil ditambah...!");
+          window.location.href = "?page=perdes";
         </script>
       <?php
+
       }
     } else {
       ?>
       <script>
-        alert("Ekstensi tidak diperbolehkan...!");
+        alert("Ukuran terlalu besar...!");
       </script>
-<?php
+    <?php
     }
+  } else {
+    ?>
+    <script>
+      alert("Ekstensi tidak diperbolehkan...!");
+    </script>
+<?php
   }
+}
 
 ?>

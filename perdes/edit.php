@@ -1,9 +1,9 @@
 <?php
 if (!isset($_SESSION["login"])) {
 ?>
-    <script>
-        window.location.href = '404.html';
-    </script>
+  <script>
+    window.location.href = '404.html';
+  </script>
 <?php
 } ?>
 <!-- Content Header (Page header) -->
@@ -155,6 +155,16 @@ if (!isset($_SESSION["login"])) {
         <div class="form-group">
           <label>Alamat</label>
           <textarea name="alamat" class="form-control" rows="5"><?= $data_perdes['alamat']; ?></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="siltap">Penghasilan</label>
+            <input type="text" class="form-control" name="siltap" id="siltap" value="<?= $data_perdes['siltap']; ?>">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="tunj">Tunjangan Lainnya</label>
+            <input type="text" class="form-control" name="tunj" id="tunj" value="<?= $data_perdes['tunj']; ?>">
+          </div>
         </div>
         <!-- <div class="form-row">
             <div class="form-group col-md-6">

@@ -61,14 +61,18 @@ if (!isset($_SESSION["login"])) {
             <input type="text" class="form-control" name="nama" id="nama" value="<?= $_POST['nama']; ?>" placeholder="Nama Lengkap" required>
           </div>
           <div class="form-group col-md-3">
+            <label for="nik">NIK</label>
+            <input type="text" class="form-control" name="nik" id="nik" value="<?= $_POST['nik']; ?>" placeholder="NIK" required>
+          </div>
+          <div class="form-group col-md-2">
             <label for="tempat">Tempat Lahir</label>
             <input type="text" class="form-control" name="tempat" id="tempat" value="<?= $_POST['tempat']; ?>" placeholder="Tempat Lahir" required>
           </div>
-          <div class="form-group col-md-3">
+          <div class="form-group col-md-2">
             <label for="tgl_lahir">Tanggal Lahir</label>
             <input type="date" class="form-control" name="tgl_lahir" id="tgl_lahir" required>
           </div>
-          <div class="form-group col-md-3">
+          <div class="form-group col-md-2">
             <label for="jk">Jenis Kelamin</label>
             <select class="form-control" id="jk" name="jk" required>
               <option>Pilih Jenis Kelamin</option>
@@ -116,13 +120,17 @@ if (!isset($_SESSION["login"])) {
           <textarea name="alamat" class="form-control" rows="5" required></textarea>
         </div>
         <div class="form-row">
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-4">
             <label for="siltap">Penghasilan</label>
-            <input type="text" class="form-control" name="siltap" id="siltap" placeholder="Penghasilan" required>
+            <input type="number" class="form-control" name="siltap" id="siltap" placeholder="Penghasilan" required>
           </div>
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-4">
             <label for="tunj">Tunjangan Lainnya</label>
-            <input type="text" class="form-control" name="tunj" id="tunj" placeholder="Tunjangan Lainnya" required>
+            <input type="number" class="form-control" name="tunj" id="tunj" placeholder="Tunjangan Lainnya" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="bengkok">Bengkok</label>
+            <input type="text" class="form-control" name="bengkok" id="bengkok" placeholder="Bengkok" required>
           </div>
         </div>
         <div class="form-row">
@@ -175,6 +183,7 @@ if (isset($_POST['add'])) {
   $kec        = mysqli_real_escape_string($conn, $_POST['kec']);
   $desa       = mysqli_real_escape_string($conn, $_POST['desa']);
   $nama       = mysqli_real_escape_string($conn, $_POST['nama']);
+  $nik        = mysqli_real_escape_string($conn, $_POST['nik']);
   $tempat     = mysqli_real_escape_string($conn, $_POST['tempat']);
   $tgl_lahir  = mysqli_real_escape_string($conn, $_POST['tgl_lahir']);
   $jk         = mysqli_real_escape_string($conn, $_POST['jk']);
@@ -185,6 +194,7 @@ if (isset($_POST['add'])) {
   $alamat     = mysqli_real_escape_string($conn, $_POST['alamat']);
   $siltap     = mysqli_real_escape_string($conn, $_POST['siltap']);
   $tunj       = mysqli_real_escape_string($conn, $_POST['tunj']);
+  $bengkok    = mysqli_real_escape_string($conn, $_POST['bengkok']);
   $status     = "Y";
 
   $gambar1  = $_FILES['foto_perdes']['name'];
@@ -204,13 +214,14 @@ if (isset($_POST['add'])) {
       move_uploaded_file($source1, $folder . $baru1);
       move_uploaded_file($source2, $folder . $baru2);
 
-      $sql = $conn->query("INSERT INTO tb_perdes (id_kec, id_desa, id_pend, id_jab, nama, jk, tempat, tgl_lahir, alamat, no_sk, tmt, foto_perdes, foto_sk, siltap, tunj, status)
+      $sql = $conn->query("INSERT INTO tb_perdes (id_kec, id_desa, id_pend, id_jab, nama, nik, jk, tempat, tgl_lahir, alamat, no_sk, tmt, foto_perdes, foto_sk, siltap, tunj, bengkok, status)
           VALUES (
                 '$kec',                
                 '$desa',                
                 '$pendidikan',                
                 '$jabatan',                
-                '$nama',                
+                '$nama',
+                '$nik',                
                 '$jk',                
                 '$tempat',                
                 '$tgl_lahir',                
@@ -221,6 +232,7 @@ if (isset($_POST['add'])) {
                 '$baru2',
                 '$siltap',
                 '$tunj',
+                '$bengkok',
                 '$status'
                   )");
       if ($sql) {

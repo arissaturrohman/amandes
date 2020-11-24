@@ -45,7 +45,7 @@ if (!isset($_SESSION["login"])) {
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="kec">Kecamatan</label>
-            <select name="kec" id="kec" class="form-control">
+            <select name="kec" id="kec" class="form-control" required>
               <?php
               $sql_kec = $conn->query("SELECT * FROM tb_kec");
               while ($data_kec = $sql_kec->fetch_array()) {
@@ -63,7 +63,7 @@ if (!isset($_SESSION["login"])) {
           </div>
           <div class="form-group col-md-6">
             <label for="desa">Desa</label>
-            <select name="desa" id="desa" class="form-control">
+            <select name="desa" id="desa" class="form-control" required>
               <?php
               $sql_desa = $conn->query("SELECT * FROM tb_desa");
               while ($data_desa = $sql_desa->fetch_array()) {
@@ -82,18 +82,22 @@ if (!isset($_SESSION["login"])) {
         </div>
         <div class="form-row">
           <div class="form-group col-md-3">
-            <label for="tempat">Tempat Lahir</label>
-            <input type="text" class="form-control" name="tempat" id="tempat" value="<?= $data_perdes['tempat']; ?>">
-          </div>
-          <div class="form-group col-md-3">
-            <label for="tgl_lahir">Tanggal Lahir</label>
-            <input type="date" class="form-control" name="tgl_lahir" id="tgl_lahir" value="<?= $data_perdes['tgl_lahir']; ?>" placeholder="Nama Lengkap">
-          </div>
-          <div class="form-group col-md-3">
             <label for="nama">Nama Lengkap</label>
-            <input type="text" class="form-control" name="nama" id="nama" value="<?= $data_perdes['nama']; ?>" placeholder="Nama Lengkap">
+            <input type="text" class="form-control" name="nama" id="nama" value="<?= $data_perdes['nama']; ?>" placeholder="Nama Lengkap" required>
           </div>
           <div class="form-group col-md-3">
+            <label for="nik">Nama Lengkap</label>
+            <input type="number" class="form-control" name="nik" id="nik" value="<?= $data_perdes['nik']; ?>" placeholder="NIK" required>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="tempat">Tempat Lahir</label>
+            <input type="text" class="form-control" name="tempat" id="tempat" value="<?= $data_perdes['tempat']; ?>" required>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="tgl_lahir">Tanggal Lahir</label>
+            <input type="date" class="form-control" name="tgl_lahir" id="tgl_lahir" value="<?= $data_perdes['tgl_lahir']; ?>" required>
+          </div>
+          <div class="form-group col-md-2">
             <label for="jk">Jenis Kelamin</label>
             <select class="form-control" id="jk" name="jk">
               <option>Pilih Jenis Kelamin</option>
@@ -109,7 +113,7 @@ if (!isset($_SESSION["login"])) {
         <div class="form-row">
           <div class="form-group col-md-3">
             <label for="pendidikan">Pendidikan</label>
-            <select name="pendidikan" id="pendidikan" class="form-control">
+            <select name="pendidikan" id="pendidikan" class="form-control" required>
               <?php
               $sql_pendidikan = $conn->query("SELECT * FROM tb_pendidikan");
               while ($data_pendidikan = $sql_pendidikan->fetch_array()) {
@@ -127,7 +131,7 @@ if (!isset($_SESSION["login"])) {
           </div>
           <div class="form-group col-md-3">
             <label for="jabatan">Jabatan</label>
-            <select name="jabatan" id="jabatan" class="form-control">
+            <select name="jabatan" id="jabatan" class="form-control" required>
               <?php
               $sql_jabatan = $conn->query("SELECT * FROM tb_jabatan");
               while ($data_jabatan = $sql_jabatan->fetch_array()) {
@@ -145,11 +149,11 @@ if (!isset($_SESSION["login"])) {
           </div>
           <div class="form-group col-md-3">
             <label for="no_sk">No SK</label>
-            <input type="text" class="form-control" name="no_sk" id="no_sk" value="<?= $data_perdes['no_sk']; ?>">
+            <input type="text" class="form-control" name="no_sk" id="no_sk" value="<?= $data_perdes['no_sk']; ?>" required>
           </div>
           <div class="form-group col-md-3">
             <label for="tmt">TMT</label>
-            <input type="date" class="form-control" name="tmt" id="tmt" value="<?= $data_perdes['tmt']; ?>">
+            <input type="date" class="form-control" name="tmt" id="tmt" value="<?= $data_perdes['tmt']; ?>" required>
           </div>
         </div>
         <div class="form-group">
@@ -159,13 +163,19 @@ if (!isset($_SESSION["login"])) {
         <div class="form-row">
           <div class="form-group col-md-3">
             <label for="siltap">Penghasilan</label>
-            <input type="text" class="form-control" name="siltap" id="siltap" value="<?= $data_perdes['siltap']; ?>">
+            <input type="text" class="form-control" name="siltap" id="siltap" value="<?= $data_perdes['siltap']; ?>" required>
           </div>
           <div class="form-group col-md-3">
             <label for="tunj">Tunjangan Lainnya</label>
-            <input type="text" class="form-control" name="tunj" id="tunj" value="<?= $data_perdes['tunj']; ?>">
+            <input type="text" class="form-control" name="tunj" id="tunj" value="<?= $data_perdes['tunj']; ?>" required>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="bengkok">Tunjangan Lainnya</label>
+            <input type="text" class="form-control" name="bengkok" id="bengkok" value="<?= $data_perdes['bengkok']; ?>" required>
           </div>
         </div>
+
+        <!-- Sampai sini -->
         <!-- <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="foto_perdes">Foto Perangkat Desa</label>
@@ -224,6 +234,7 @@ if (isset($_POST['edit'])) {
   $kec        = mysqli_real_escape_string($conn, $_POST['kec']);
   $desa       = mysqli_real_escape_string($conn, $_POST['desa']);
   $nama       = mysqli_real_escape_string($conn, $_POST['nama']);
+  $nik        = mysqli_real_escape_string($conn, $_POST['nik']);
   $tempat     = mysqli_real_escape_string($conn, $_POST['tempat']);
   $tgl_lahir  = mysqli_real_escape_string($conn, $_POST['tgl_lahir']);
   $jk         = mysqli_real_escape_string($conn, $_POST['jk']);
@@ -232,6 +243,9 @@ if (isset($_POST['edit'])) {
   $no_sk      = mysqli_real_escape_string($conn, $_POST['no_sk']);
   $tmt        = mysqli_real_escape_string($conn, $_POST['tmt']);
   $alamat     = mysqli_real_escape_string($conn, $_POST['alamat']);
+  $siltap     = mysqli_real_escape_string($conn, $_POST['siltap']);
+  $tunj       = mysqli_real_escape_string($conn, $_POST['tunj']);
+  $bengkok    = mysqli_real_escape_string($conn, $_POST['bengkok']);
   $status     = mysqli_real_escape_string($conn, $_POST['status']);
 
   // $gambar1  = $_FILES['foto_perdes']['name'];
@@ -257,12 +271,16 @@ if (isset($_POST['edit'])) {
                             id_pend   ='$pendidikan',
                             id_jab    ='$jabatan',
                             nama      ='$nama',
+                            nik       ='$nik',
                             jk        ='$jk',
                             tempat    ='$tempat',
                             tgl_lahir ='$tgl_lahir',
                             alamat    ='$alamat',
                             no_sk     ='$no_sk',
                             tmt       ='$tmt',
+                            siltap    ='$siltap',
+                            tunj      ='$tunj'
+                            bengkok   ='$bengkok'
                             status    ='$status'
                             WHERE id_perdes='$id_perdes'
                             ");

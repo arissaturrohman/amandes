@@ -137,14 +137,14 @@ if (!isset($_SESSION["login"])) {
           <div class="form-group col-md-6">
             <label for="foto_perdes">Foto Perangkat Desa</label>
             <div class="custom-file">
-              <input type="file" name="foto_perdes" class="custom-file-input" id="customFile" required>
+              <input type="file" name="foto_perdes" class="custom-file-input" id="customFile">
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </div>
           <div class="form-group col-md-6">
             <label for="foto_sk">Foto SK</label>
             <div class="custom-file">
-              <input type="file" name="foto_sk" class="custom-file-input" id="customFile" required>
+              <input type="file" name="foto_sk" class="custom-file-input" id="customFile">
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </div>
@@ -201,16 +201,70 @@ if (isset($_POST['add'])) {
   $gambar2  = explode(".", $_FILES['foto_sk']['name']);
   $source1  = $_FILES['foto_perdes']['tmp_name'];
   $source2  = $_FILES['foto_sk']['tmp_name'];
-  $size   = $_FILES['foto_perdes']['size'];
+  $foto1    = $_FILES['foto_perdes']['error'];
+  $foto2    = $_FILES['foto_sk']['error'];
+  $size     = $_FILES['foto_perdes']['size'];
   $eks      = array('jpg', 'jpeg', 'png', 'pdf');
   $y        = explode('.', $gambar1);
-  $ekstensi = strtolower(end($y));
+  $ekstensi = strtolower(end($y, $gambar2));
   $folder   = 'assets/img/';
   $baru1    = date('dmYHis') . $gambar1;
   $baru2    = round(microtime(true)) . '.' . end($gambar2);
+  $gagal1   = date('dmYHis') . 'user.png';
+  $gagal2   = round(microtime(true)) . 'file.jpg';
 
-  if (in_array($ekstensi, $eks) === true) {
-    if ($size > 2048) {
+  if ($foto1 === 4) {
+    if ($foto2 === 4) {
+
+      $sql = $conn->query("INSERT INTO tb_perdes (id_kec, id_desa, id_pend, id_jab, nama, nik, jk, tempat, tgl_lahir, alamat, no_sk, tmt, foto_perdes, foto_sk, siltap, tunj, bengkok, status)
+          VALUES (
+                '$kec',                
+                '$desa',                
+                '$pendidikan',                
+                '$jabatan',                
+                '$nama',
+                '$nik',                
+                '$jk',                
+                '$tempat',                
+                '$tgl_lahir',                
+                '$alamat',                
+                '$no_sk',                
+                '$tmt',                
+                '',
+                '',
+                '$siltap',
+                '$tunj',
+                '$bengkok',
+                '$status'
+                  )");
+
+      if ($sql) {
+?>
+        <script>
+          alert("Data berhasil ditambah...!");
+          window.location.href = "?page=perdes";
+        </script>
+      <?php
+
+      }
+    } else {
+      ?>
+      <script>
+        alert("gagal 1");
+      </script>
+    <?php
+    }
+  } else {
+    ?>
+    <script>
+      alert("gagal 2");
+    </script>
+    <?php
+  }
+
+
+  if (!in_array($ekstensi, $eks) === true) {
+    if (!$size > 2048) {
       move_uploaded_file($source1, $folder . $baru1);
       move_uploaded_file($source2, $folder . $baru2);
 
@@ -236,7 +290,7 @@ if (isset($_POST['add'])) {
                 '$status'
                   )");
       if ($sql) {
-?>
+    ?>
         <script>
           alert("Data berhasil ditambah...!");
           window.location.href = "?page=perdes";

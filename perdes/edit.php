@@ -279,8 +279,8 @@ if (isset($_POST['edit'])) {
                             no_sk     ='$no_sk',
                             tmt       ='$tmt',
                             siltap    ='$siltap',
-                            tunj      ='$tunj'
-                            bengkok   ='$bengkok'
+                            tunj      ='$tunj',
+                            bengkok   ='$bengkok',
                             status    ='$status'
                             WHERE id_perdes='$id_perdes'
                             ");

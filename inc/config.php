@@ -1,2 +1,2 @@
-<?php 
-$conn = mysqli_connect("localhost", "root", "", "db_amandes");
+<?php
+$conn = mysqli_connect("localhost", "root", "", "db_simperdes");

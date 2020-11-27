@@ -19,7 +19,8 @@
 $id = $_GET['id'];
 $sql = $conn->query("SELECT * FROM tb_perdes WHERE id_perdes=$id");
 $data = $sql->fetch_assoc();
-// hitung pensiun
+
+// hitung pensiun perangkat
 $lahir = $data['tgl_lahir'];
 $timeToAdd = "+ 60 years";
 $objDateTime = DateTime::createFromFormat("Y-m-d", $lahir);
@@ -29,6 +30,19 @@ $tahun = date('Y');
 $bulan = date('m');
 $sisaTahun = $objDateTime->format("Y") - $tahun;
 $sisaBulan = $objDateTime->format("m");
+
+// hitung pensiun kades
+$tmt = $data['tmt'];
+$timeToAddKades = "+ 5 years";
+$objDateTimeKades = DateTime::createFromFormat("Y-m-d", $tmt);
+$objDateTimeKades->modify($timeToAddKades);
+$retire_dateKades = date('d-m-Y', strtotime($tmt));
+$tahunKades = date('Y');
+$bulanKades = date('m');
+$hariKades  = date("d");
+$sisaTahunKades = $objDateTimeKades->format("Y") - $tahunKades;
+$sisaBulanKades = $objDateTimeKades->format("m");
+$sisaHariKades  = $objDateTimeKades->format("d");
 
 // hitung lama kerja
 $awal   = $data['tmt'];
@@ -43,11 +57,17 @@ $hasil = date_diff($awal1, $akhir);
       <div class="mt-1 text-center">
         <?php
         if (isset($_SESSION["login"])) {
+          if ($data['foto_perdes'] == '') {
+
+            echo '<a href="assets/img/user.png" data-toggle="lightbox" data-title="Foto Perangkat Desa" data-footer="<a href="?page=perdes&action=edit_foto&id=<?= $data[id_perdes]; ?>" class="btn btn-default">Edit Foto</a>"><img src="assets/img/user.png" width="10%" height="10%" class="img-fluid" alt=""></a>';
+            // echo '<img src="assets/img/user.png" width="10%" height="10%" class="img-fluid" alt=""></a>';
+          } else {
         ?>
-          <a href="assets/img/<?= $data['foto_perdes']; ?>" data-toggle="lightbox" data-title="Foto Perangkat Desa" data-footer="<a href='?page=perdes&action=edit_foto&id=<?= $data['id_perdes']; ?>' class='btn btn-default'>Edit Foto</a>">
-          <?php } ?>
+            <a href="assets/img/<?= $data['foto_perdes']; ?>" data-toggle="lightbox" data-title="Foto Perangkat Desa" data-footer="<a href='?page=perdes&action=edit_foto&id=<?= $data['id_perdes']; ?>' class='btn btn-default'>Edit Foto</a>">
+          <?php }
+        } ?>
           <img src="assets/img/<?= $data['foto_perdes']; ?>" width="10%" height="10%" class="img-fluid" alt=""></a>
-          <p class="font-weight-bold mt-2"><?= $data['nama']; ?></p>
+            <p class="font-weight-bold mt-2"><?= $data['nama']; ?></p>
       </div>
       <hr>
       <div class="mt-3">
@@ -100,8 +120,7 @@ $hasil = date_diff($awal1, $akhir);
                   <?php
                   if ($data["jk"] == "lk") {
                     echo ": Laki-laki";
-                  }
-                  if ($data['jk'] == "pr") {
+                  } else {
                     echo ": Perempuan";
                   } ?>
                 </td>
@@ -145,7 +164,13 @@ $hasil = date_diff($awal1, $akhir);
               <tr>
                 <td>Masa Pensiun</td>
                 <td>
-                  <?php echo ": " . $sisaTahun . " tahun " . $sisaBulan . " bulan "; ?>
+                  <?php
+                  if ($data["id_jab"] == "1") {
+                    echo ": " . $sisaTahunKades . " tahun " . $sisaBulanKades . " bulan " . $sisaHariKades . " hari  /  " . tgl_indo($sisaTahunKades = $objDateTimeKades->format("Y-m-d"));
+                  } else {
+                    echo ": " . $sisaTahun . " tahun " . $sisaBulan . " bulan  /  " . tgl_indo($sisaTahun = $objDateTime->format("Y-m-d"));
+                  } ?>
+
                 </td>
               </tr>
               <tr>
@@ -183,10 +208,16 @@ $hasil = date_diff($awal1, $akhir);
           <div class="col-md-6">
             <?php
             if (isset($_SESSION["login"])) {
+              if ($data['foto_sk'] == '') {
             ?>
-              <a href="assets/img/<?= $data['foto_sk']; ?>" data-toggle="lightbox" data-title="Foto SK" title="Foto SK" data-footer="<a href='?page=perdes&action=edit_sk&id=<?= $data['id_perdes']; ?>' class='btn btn-default'>Edit SK</a>">
-              <?php } ?>
-              <img src="assets/img/<?= $data['foto_sk']; ?>" width="100%" class="img-fluid" alt=""></a>
+                <a href="assets/img/file.jpg" data-toggle="lightbox" data-title="Foto SK" title="Foto SK" data-footer="<a href='?page=perdes&action=edit_sk&id=<?= $data['id_perdes']; ?>' class='btn btn-default'>Edit SK</a>">
+                <?php
+              } else {
+                ?>
+                  <a href="assets/img/<?= $data['foto_sk']; ?>" data-toggle="lightbox" data-title="Foto SK" title="Foto SK" data-footer="<a href='?page=perdes&action=edit_sk&id=<?= $data['id_perdes']; ?>' class='btn btn-default'>Edit SK</a>">
+                <?php }
+            } ?>
+                <img src="assets/img/<?= $data['foto_sk']; ?>" width="100%" class="img-fluid" alt=""></a>
           </div>
         </div>
       </div>
@@ -196,7 +227,7 @@ $hasil = date_diff($awal1, $akhir);
       if (isset($_SESSION["login"])) {
       ?>
         <a href="?page=perdes&action=edit&id=<?= $data['id_perdes']; ?>" class="btn btn-primary"><i class="fas fa-edit"></i> Edit Data</a>
-        <!-- <a href="?page=perdes&action=delete&id=<?= $data['id_perdes']; ?>" name="delete" onclick="return confirm('Apakah anda yakin menghapus data ini...?')" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete Data</a> -->
+        <a href="?page=perdes&action=delete&id=<?= $data['id_perdes']; ?>" name="delete" onclick="return confirm('Apakah anda yakin menghapus data ini...?')" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete Data</a>
       <?php } ?>
       <a href="?page=perdes" class="btn btn-default float-right">Cancel</a>
     </div>

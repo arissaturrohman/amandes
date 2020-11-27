@@ -164,6 +164,12 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
                                             <p>Pendidikan</p>
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="?page=user&action=pass&id=<?= $_SESSION['id_user']; ?>" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Ganti Password</p>
+                                        </a>
+                                    </li>
                                     <?php
                                     if ($_SESSION["level"] == "admin") {
                                     ?>
